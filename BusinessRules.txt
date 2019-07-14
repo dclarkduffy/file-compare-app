@@ -1,0 +1,19 @@
+Buisness Rules/Description:
+
+A customer requires a reconciliation and has a list of transactions where the outcome is unclear. For example, consider a client that's been taking transactions offline, they may not have the ability to confirm the status of each transaction. Were they captured or declined?
+
+It is our responsibility to match each transaction to either an uncaptured authorization, and or a captured transaction. The process starts when the client provides us with a csv file containing all transactions in question. The four required data points are as follows: Pan(Last 4 of cc), Invoice #, Total Amount and StoreID.
+
+As matches are made it's beneficial to remove them from the intially supplied list and place them in either a "matched to uncaptured auth" or "matched to captured". This will make the final results clear because you will end up with three final lists. 
+
+1. Customer Data (UNMATCHED TRANS)
+2. Matched to uncaptured auth (CAN POTENTIALLY BE CAPTURED)
+3. Matched to captured (CONFIRMED CAPTURES)
+
+
+It's recommended to first match to uncaptured auths because uncaptured authorizations will only have a total amount. Once this comparison has been made, you can match against captured transactions using the approved amount. Lastly, you will want to match against captured transactions using the total amount because there are instances where the approved amount is less than the total. 
+
+
+Firm Rules:
+a. If any duplicate transactions are present in the Customer Data, either reject the file or place these transactions in another list as "Ignored Transactions" and skip the validation process on this subset.
+b. If any of the four data points are missing from the Customer Data, either reject the file or place these transactions in another list as "Ignored Transactions" and skip the validation process on this subset.
