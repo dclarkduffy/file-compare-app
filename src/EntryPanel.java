@@ -41,7 +41,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 		label = new JLabel(labelText);
 		label.setFont(font);
 		textField.setFont(font);
-		fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser("c:\\");
 		fileChooser.setPreferredSize(new Dimension(1000, 800));
 		setFileChooserFont(fileChooser.getComponents(), font);
 		
@@ -79,7 +79,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == browserButton) {
 			loadFile();
-		}else if(e.getSource() == removeButton) {
+		}else if(e.getSource() == removeButton & file != null) {
 			removeFile();
 		}
 	}
@@ -87,12 +87,13 @@ public class EntryPanel extends JPanel implements ActionListener{
 	public void loadFile() {
 		int selection = fileChooser.showOpenDialog(this);
         if (selection == JFileChooser.APPROVE_OPTION) {
-        	file = fileChooser.getSelectedFile();
-        	setTextFieldText(file.getName());
-        	FileCompare.addFile(file);
-        	System.out.println(FileCompare.getFileCount());
-        } else {
-            System.out.println("Open command cancelled by user." );
+        	try {
+	        	file = fileChooser.getSelectedFile();
+	        	setTextFieldText(file.getName());
+	        	FileCompare.addFile(file);
+        	}catch(Exception ex) {
+        		ex.printStackTrace();
+        	}
         }
 	}
 	

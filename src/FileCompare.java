@@ -63,13 +63,6 @@ public class FileCompare {
 	public static void runComparison() {
 		try {
 			addFileContentsToList();
-			for(int i = 0; i < fileContents.size(); i++) {
-				System.out.println("File: " + i);
-				for(int j = 0; j < fileContents.get(i).size(); j++) {
-					System.out.println(fileContents.get(i).get(j));
-				}
-				System.out.println();
-			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

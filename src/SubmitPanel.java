@@ -29,6 +29,10 @@ public class SubmitPanel extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		FileCompare.runComparison();
+		if(FileCompare.getFileCount() < 2) {
+			JOptionPane.showMessageDialog(null,"You must select at least 2 files for comparsison");
+		}else {
+			FileCompare.runComparison();
+		}
 	}
 }

@@ -1,5 +1,6 @@
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.*;
 
 /**
  * 
@@ -11,6 +12,8 @@ public class Project {
 	public static void main(String args[]) {
 		
 		final Font font = new Font("Times New Roman",Font.PLAIN, 18);
+		UIManager.put("OptionPane.messageFont", font);
+		UIManager.put("OptionPane.buttonFont", font);
 		
 		UserWindow userWindow;
 		EntryPanel fileOnePanel;
