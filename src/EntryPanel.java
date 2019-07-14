@@ -3,6 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * 
+ * @author 	MGries
+ * @version 1.0
+ * @since	1.0
+ */
 public class EntryPanel extends JPanel implements ActionListener{
 	
 	private JTextField textField = new JTextField(50);
@@ -12,6 +18,15 @@ public class EntryPanel extends JPanel implements ActionListener{
 	private JFileChooser fileChooser;
 	private File file;
 	
+	/**
+	 * Constructor method
+	 * <p>
+	 * Builds the panel where the user 
+	 * can input the file selection
+	 * </p>
+	 * @param labelText
+	 * @param font
+	 */
 	public EntryPanel(String labelText, Font font) {
 		setPreferredSize(new Dimension(800, 600));
 		
@@ -52,25 +67,45 @@ public class EntryPanel extends JPanel implements ActionListener{
 		);
 	}
 	
+	/**
+	 * <p>Add file name to text field</p>
+	 * @param txt
+	 */
 	public void setTextFieldText(String txt) {
 		textField.setText(txt);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == browserButton) {
-			int selection = fileChooser.showOpenDialog(this);
-	        if (selection == JFileChooser.APPROVE_OPTION) {
-	        	file = fileChooser.getSelectedFile();
-	        	setTextFieldText(file.getName());
-	        	FileCompare.addFile(file);
-	        	System.out.println(FileCompare.getFileCount());
-	        } else {
-	            System.out.println("Open command cancelled by user." );
-	        }
+			loadFile();
 		}else if(e.getSource() == removeButton) {
+			removeFile();
+		}
+	}
+	
+	public void loadFile() {
+		int selection = fileChooser.showOpenDialog(this);
+        if (selection == JFileChooser.APPROVE_OPTION) {
+        	file = fileChooser.getSelectedFile();
+        	setTextFieldText(file.getName());
+        	FileCompare.addFile(file);
+        	System.out.println(FileCompare.getFileCount());
+        } else {
+            System.out.println("Open command cancelled by user." );
+        }
+	}
+	
+	public void removeFile() {
+		int confirmation = JOptionPane.showConfirmDialog(
+				null,
+				"Are you sure you want to remove this file", 
+				"Confirm remove", 
+				JOptionPane.YES_NO_OPTION
+		);
+		if(confirmation == JOptionPane.YES_OPTION) {
 			FileCompare.removeFile(file);
-			textField.setText("");
+			textField.setText("");	
 		}
 	}
 	
