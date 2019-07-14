@@ -14,7 +14,6 @@ public class Project {
 		final Font font = new Font("Times New Roman",Font.PLAIN, 18);
 		UIManager.put("OptionPane.messageFont", font);
 		UIManager.put("OptionPane.buttonFont", font);
-		final int testInt = 0;
 		
 		UserWindow userWindow;
 		EntryPanel fileOnePanel;
